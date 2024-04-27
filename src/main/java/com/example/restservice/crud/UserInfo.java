@@ -35,7 +35,7 @@ public class UserInfo {
 	private String userName;
 	@NotNull
 	private String password;
-	private String encryptedPassword;
+//	private String encryptedPassword;
 	private Integer orgId;
 	private Integer orgLevelNo;
 	
