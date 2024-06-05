@@ -73,9 +73,9 @@ public class Child {
 	
 	private Integer bloodGroup;
 	
-	private Long aadharNumber;
-	private String abuseOnStreet;
-	private String noOfTimesLeavingHome;
+	private Long aadharNo;
+	private String anyAbuse;
+	private String NoOfTimesleftHome;
 	
 
 	
@@ -359,28 +359,28 @@ public class Child {
 		this.picture = picture;
 	}
 
-	public Long getAadharNumber() {
-		return aadharNumber;
+	public Long getAadharNo() {
+		return aadharNo;
 	}
 
-	public void setAadharNumber(Long aadharNumber) {
-		this.aadharNumber = aadharNumber;
+	public void setAadharNo(Long aadharNo) {
+		this.aadharNo = aadharNo;
 	}
 
-	public String getAbuseOnStreet() {
-		return abuseOnStreet;
+	public String getAnyAbuse() {
+		return anyAbuse;
 	}
 
-	public void setAbuseOnStreet(String abuseOnStreet) {
-		this.abuseOnStreet = abuseOnStreet;
+	public void setAnyAbuse(String anyAbuse) {
+		this.anyAbuse = anyAbuse;
 	}
 
-	public String getNoOfTimesLeavingHome() {
-		return noOfTimesLeavingHome;
+	public String getNoOfTimesleftHome() {
+		return NoOfTimesleftHome;
 	}
 
-	public void setNoOfTimesLeavingHome(String noOfTimesLeavingHome) {
-		this.noOfTimesLeavingHome = noOfTimesLeavingHome;
+	public void setNoOfTimesleftHome(String NoOfTimesleftHome) {
+		this.NoOfTimesleftHome = NoOfTimesleftHome;
 	}
 	
 	
