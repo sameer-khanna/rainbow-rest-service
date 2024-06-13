@@ -64,7 +64,7 @@ public class ChildEducation {
     public Integer	previous_Edu_Details;
     
     public String  stayType;
-    public String  bridgeCourse;
+//    public String  bridgeCourse;
     public String  classDetails;
     public String  sponsorship;
     public String  spnsorshipFor;

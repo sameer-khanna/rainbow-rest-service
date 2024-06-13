@@ -208,7 +208,7 @@ public class ChildBasicController {
 			childEducation.setStayType("Never Enrolled");
 			childEducation.setSpnsorshipFor("Never Enrolled");
 			childEducation.setSponsorship("NvrEnrlled");
-			childEducation.setBridgeCourse("NvrEnrlled");
+//			childEducation.setBridgeCourse("NvrEnrlled");
 			childEducation.setSchooltype(0);
 			childEducation.setStudyingclass(0);
 			childEducation.setMedium(0);
