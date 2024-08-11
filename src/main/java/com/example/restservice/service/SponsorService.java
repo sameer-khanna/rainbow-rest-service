@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class SponsorService {
@@ -64,5 +68,24 @@ public class SponsorService {
                 .birthday(savedSponsor.getBirthday())
                 .address(savedSponsor.getAddress())
                 .build();
+    }
+
+    private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        return pattern.matcher(strNum).matches();
+    }
+
+    public List<Sponsor> getSponsorListBySearchParams(String search){
+        if (isNumeric(search)){
+//            return sponsorRepository.findBySponsorNoStartingWith(Integer.parseInt(search));
+            return sponsorRepository.findAllById(Collections.singleton(Integer.parseInt(search)));
+        }
+        else {
+            return sponsorRepository.findBySponsorNameStartingWith(search);
+        }
     }
 }

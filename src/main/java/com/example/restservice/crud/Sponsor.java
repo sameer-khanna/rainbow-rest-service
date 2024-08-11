@@ -1,7 +1,9 @@
 package com.example.restservice.crud;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +12,12 @@ import java.time.LocalDateTime;
 @Table(name = "Sponsor", schema = "dbo")
 @Builder
 @Data
+@AllArgsConstructor
 public class Sponsor {
+
+    public Sponsor() {
+        super();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

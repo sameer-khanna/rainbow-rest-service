@@ -1,7 +1,10 @@
 package com.example.restservice.crud;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
+@Getter
 @Entity
 @Table(name = "SponsorshipType", schema = "dbo")
 public class SponsorshipType {
@@ -15,16 +18,8 @@ public class SponsorshipType {
     private String sponsorshipType;
 
 
-    public Integer getSponsorshipTypeID() {
-        return sponsorshipTypeID;
-    }
-
     public void setSponsorshipTypeID(Integer sponsorshipTypeID) {
         this.sponsorshipTypeID = sponsorshipTypeID;
-    }
-
-    public String getSponsorshipType() {
-        return sponsorshipType;
     }
 
     public void setSponsorshipType(String sponsorshipType) {
