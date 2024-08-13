@@ -5,6 +5,8 @@ import com.example.restservice.crud.ContributionDetails;
 import com.example.restservice.model.ContributionRequest;
 import com.example.restservice.model.ContributionResponse;
 import com.example.restservice.repository.ContributionDetailsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,30 +20,38 @@ public class ContributionDetailsService {
     @Autowired
     private ContributionDetailsRepository contributionDetailsRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(ContributionDetailsService.class);
+
     @Transactional
     public List<ContributionResponse> createContribution(ContributionRequest contributionRequest) {
+        try {
+            Integer[] rhNos = contributionRequest.getRHNos();
+            int numberOfRhs = rhNos.length;
 
-        Integer[] rhNos = contributionRequest.getRHNos();
-        int numberOfRhs = rhNos.length;
+            double dividedAmount = contributionRequest.getAmount() / numberOfRhs;
+            int dividedQuantity = contributionRequest.getQuantity() / numberOfRhs;
 
-        double dividedAmount = contributionRequest.getAmount() / numberOfRhs;
-        int dividedQuantity = contributionRequest.getQuantity() / numberOfRhs;
+            ContributionDetails savedContributionEntity = null;
+            List<ContributionResponse> contributionResponseList = new ArrayList<>();
 
-        ContributionDetails savedContributionEntity = null;
-        List<ContributionResponse> contributionResponseList = new ArrayList<>();
+            for (Integer rhNo : rhNos) {
+                ContributionDetails requestEntity = toRequestEntity(contributionRequest);
+                requestEntity.setRhNo(rhNo);
+                requestEntity.setAmount(dividedAmount);
+                requestEntity.setQuantity(dividedQuantity);
 
-        for (Integer rhNo : rhNos) {
-            ContributionDetails requestEntity = toRequestEntity(contributionRequest);
-            requestEntity.setRhNo(rhNo);
-            requestEntity.setAmount(dividedAmount);
-            requestEntity.setQuantity(dividedQuantity);
+                savedContributionEntity = contributionDetailsRepository.save(requestEntity);
 
-            savedContributionEntity = contributionDetailsRepository.save(requestEntity);
+                contributionResponseList.add(toContributionResponse(savedContributionEntity));
+            }
 
-            contributionResponseList.add(toContributionResponse(savedContributionEntity));
+            return contributionResponseList;
+        } catch (Exception ex) {
+            logger.error("Error occurred while creating contribution", ex);
+
+            throw new RuntimeException("Error occurred while creating contribution", ex);
         }
 
-        return contributionResponseList;
     }
 
     private ContributionDetails toRequestEntity(ContributionRequest contributionRequest) {

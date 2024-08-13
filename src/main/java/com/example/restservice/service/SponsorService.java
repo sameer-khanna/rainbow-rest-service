@@ -6,8 +6,11 @@ import com.example.restservice.model.SponsorRequest;
 import com.example.restservice.model.SponsorResponse;
 import com.example.restservice.repository.DonorTypeRepository;
 import com.example.restservice.repository.SponsorRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -20,15 +23,26 @@ public class SponsorService {
     @Autowired
     private DonorTypeRepository donorTypeRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(SponsorService.class);
+
+    @Transactional
     public SponsorResponse createSponsor(SponsorRequest sponsorRequest) {
-        DonorType donorType = donorTypeRepository.findById(sponsorRequest.getDonorTypeId())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Donor Type Id"));
+        try {
+            DonorType donorType = donorTypeRepository.findById(sponsorRequest.getDonorTypeId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Donor Type Id"));
 
-        Sponsor sponsorEntity = toSponsorEntity(sponsorRequest, donorType);
+            Sponsor sponsorEntity = toSponsorEntity(sponsorRequest, donorType);
 
-        Sponsor savedSponsor = sponsorRepository.save(sponsorEntity);
+            Sponsor savedSponsor = sponsorRepository.save(sponsorEntity);
 
-        return toSponsorResponse(savedSponsor);
+            return toSponsorResponse(savedSponsor);
+        } catch (IllegalArgumentException ex) {
+            logger.error("Invalid Donor Type Id", ex.getMessage());
+            throw ex;
+        } catch (Exception ex) {
+             logger.error("Unexpected error occurred while creating Sponsor", ex);
+            throw new RuntimeException("An error occurred while creating the sponsor. Please try again later.", ex);
+        }
     }
 
     private Sponsor toSponsorEntity(SponsorRequest sponsorRequest, DonorType donorType) {
