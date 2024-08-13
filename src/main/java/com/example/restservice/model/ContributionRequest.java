@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class ContributionRequest {
-    @JsonProperty("rhNo")
-    private Integer rHNo;
+    @JsonProperty("rhNos")
+    private Integer[] rHNos;
 
     @JsonProperty("sponsorshipTypeID")
     private Integer sponsorshipTypeID;

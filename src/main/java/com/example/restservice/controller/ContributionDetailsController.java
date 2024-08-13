@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class ContributionDetailsController {
@@ -16,8 +18,8 @@ public class ContributionDetailsController {
     private ContributionDetailsService contributionDetailsService;
 
     @PostMapping("/createContribution")
-    public ResponseEntity<ContributionResponse> createContribution(@RequestBody ContributionRequest contributionRequest) {
-        ContributionResponse savedContribution = contributionDetailsService.createContribution(contributionRequest);
-        return new ResponseEntity<>(savedContribution, HttpStatus.CREATED);
+    public ResponseEntity<List<ContributionResponse>> createContribution(@RequestBody ContributionRequest contributionRequest) {
+        List<ContributionResponse> savedContributionList = contributionDetailsService.createContribution(contributionRequest);
+        return new ResponseEntity<>(savedContributionList, HttpStatus.CREATED);
     }
 }

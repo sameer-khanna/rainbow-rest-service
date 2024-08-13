@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ContributionDetailsService {
 
@@ -16,21 +19,37 @@ public class ContributionDetailsService {
     private ContributionDetailsRepository contributionDetailsRepository;
 
     @Transactional
-    public ContributionResponse createContribution(ContributionRequest contributionRequest) {
-        ContributionDetails requestEntity = toRequestEntity(contributionRequest);
-        ContributionDetails savedContributionEntity = contributionDetailsRepository.save(requestEntity);
-        return toContributionResponse(savedContributionEntity);
+    public List<ContributionResponse> createContribution(ContributionRequest contributionRequest) {
+
+        Integer[] rhNos = contributionRequest.getRHNos();
+        int numberOfRhs = rhNos.length;
+
+        double dividedAmount = contributionRequest.getAmount() / numberOfRhs;
+        int dividedQuantity = contributionRequest.getQuantity() / numberOfRhs;
+
+        ContributionDetails savedContributionEntity = null;
+        List<ContributionResponse> contributionResponseList = new ArrayList<>();
+
+        for (Integer rhNo : rhNos) {
+            ContributionDetails requestEntity = toRequestEntity(contributionRequest);
+            requestEntity.setRhNo(rhNo);
+            requestEntity.setAmount(dividedAmount);
+            requestEntity.setQuantity(dividedQuantity);
+
+            savedContributionEntity = contributionDetailsRepository.save(requestEntity);
+
+            contributionResponseList.add(toContributionResponse(savedContributionEntity));
+        }
+
+        return contributionResponseList;
     }
 
     private ContributionDetails toRequestEntity(ContributionRequest contributionRequest) {
         return ContributionDetails.builder()
-                .rhNo(contributionRequest.getRHNo())
                 .sponsorshipTypeId(contributionRequest.getSponsorshipTypeID())
                 .sponsorName(contributionRequest.getSponsorName())
                 .contributionDate(contributionRequest.getContributionDate())
                 .inkindID(contributionRequest.getInkindId())
-                .quantity(contributionRequest.getQuantity())
-                .amount(contributionRequest.getAmount())
                 .createdOn(contributionRequest.getCreatedOn())
                 .createdBy(contributionRequest.getCreatedBy())
                 .modifiedBy(contributionRequest.getModifiedBy())
