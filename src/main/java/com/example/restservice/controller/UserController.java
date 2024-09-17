@@ -29,11 +29,11 @@ public class UserController {
 			userLoginResponseDTO.setComments("The User Name doesn't exist");
 			return userLoginResponseDTO;
 		} else {
-			if (null!= userInfo.getOrgLevelNo() && userInfo.getOrgLevelNo() !=  5) {
-				userLoginResponseDTO.setAuthStatus(false);
-				userLoginResponseDTO.setComments("Please use Home Staff ID to login");
-			}
-			else if (userInfo.getPassword().equals(requestUserInfo.getPassword())) {
+//			if (null!= userInfo.getOrgLevelNo() && userInfo.getOrgLevelNo() !=  5) {
+//				userLoginResponseDTO.setAuthStatus(false);
+//				userLoginResponseDTO.setComments("Please use Home Staff ID to login");
+//			}
+			if (userInfo.getPassword().equals(requestUserInfo.getPassword())) {
 				userLoginResponseDTO.setAuthStatus(true);
 				userLoginResponseDTO.setOrgId(userInfo.getOrgId());
 				userLoginResponseDTO.setHomeCode(userInfo.getRainbowHome().getRhCode());
