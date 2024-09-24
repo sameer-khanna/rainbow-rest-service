@@ -23,6 +23,7 @@ public class UserController {
 	@PostMapping("/user-login")
 	public UserLoginResponseDTO getUserLogin(@Valid @RequestBody UserInfo requestUserInfo) {
 		UserInfo userInfo =  userInfoRepository.findByuserName(requestUserInfo.getUserName());
+		System.out.println(userInfo);
 		UserLoginResponseDTO userLoginResponseDTO = new UserLoginResponseDTO();
 		if (null == userInfo) {
 			userLoginResponseDTO.setAuthStatus(false);
@@ -36,6 +37,7 @@ public class UserController {
 			if (userInfo.getPassword().equals(requestUserInfo.getPassword())) {
 				userLoginResponseDTO.setAuthStatus(true);
 				userLoginResponseDTO.setOrgId(userInfo.getOrgId());
+				userLoginResponseDTO.setOrgLevelNo(userInfo.getOrgLevelNo());
 				userLoginResponseDTO.setHomeCode(userInfo.getRainbowHome().getRhCode());
 				userLoginResponseDTO.setComments("Authentication successful");
 			} else {

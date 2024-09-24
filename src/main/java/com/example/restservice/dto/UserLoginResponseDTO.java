@@ -11,6 +11,7 @@ public class UserLoginResponseDTO {
 	
 	private Boolean authStatus;
 	private Integer orgId;
+	private Integer orgLevelNo;
 	private String homeCode;
 	private String comments;
 
