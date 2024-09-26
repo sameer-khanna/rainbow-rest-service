@@ -81,6 +81,10 @@ public class SponsorService {
 
     public List<Sponsor> getSponsorListBySearchParams(String search){
         if (isNumeric(search)){
+            long phone = Long.parseLong(search);
+            if ((phone%10^9)!=0){
+                return sponsorRepository.findByMobileNo(search);
+            }
 //            return sponsorRepository.findBySponsorNoStartingWith(Integer.parseInt(search));
             return sponsorRepository.findAllById(Collections.singleton(Integer.parseInt(search)));
         }

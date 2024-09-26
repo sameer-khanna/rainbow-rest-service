@@ -12,5 +12,6 @@ public interface SponsorRepository extends JpaRepository<Sponsor, Integer> {
 
     List<Sponsor> findBySponsorNameStartingWith(String name);
     List<Sponsor> findBySponsorNoStartingWith(Integer sponsorNo);
+    List<Sponsor> findByMobileNo(String mobileNo);
 }
 
