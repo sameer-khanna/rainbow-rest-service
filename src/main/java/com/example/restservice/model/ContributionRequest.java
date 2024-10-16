@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -56,4 +57,16 @@ public class ContributionRequest {
 
     @JsonProperty("sponsorId")
     private Integer sponsorId;
+
+    @JsonProperty("budgetedFromDonation")
+    private double budgetedFromDonation;
+
+    @JsonProperty("unBudgetedFromDonation")
+    private double unBudgetedFromDonation;
+
+    @JsonProperty("specialDayDate")
+    private LocalDate specialDayDate;
+
+    @JsonProperty("donationPurposeId")
+    private Integer donationPurposeId;
 }

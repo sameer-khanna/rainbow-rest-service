@@ -30,6 +30,8 @@ public class ContributionDetailsService {
 
             double dividedAmount = contributionRequest.getAmount() / numberOfRhs;
             int dividedQuantity = contributionRequest.getQuantity() / numberOfRhs;
+            double budgetedDonation = contributionRequest.getBudgetedFromDonation() / numberOfRhs;
+            double unBudgetedDonation = contributionRequest.getUnBudgetedFromDonation() / numberOfRhs;
 
             ContributionDetails savedContributionEntity = null;
             List<ContributionResponse> contributionResponseList = new ArrayList<>();
@@ -39,6 +41,8 @@ public class ContributionDetailsService {
                 requestEntity.setRhNo(rhNo);
                 requestEntity.setAmount(dividedAmount);
                 requestEntity.setQuantity(dividedQuantity);
+                requestEntity.setBudgetedFromDonation(budgetedDonation);
+                requestEntity.setUnBudgetedFromDonation(unBudgetedDonation);
 
                 savedContributionEntity = contributionDetailsRepository.save(requestEntity);
 
@@ -70,6 +74,10 @@ public class ContributionDetailsService {
                 .programTypeId(contributionRequest.getProgramTypeId())
                 .donorPreferenceId(contributionRequest.getDonorPreferenceId())
                 .sponsorId(contributionRequest.getSponsorId())
+                .budgetedFromDonation(contributionRequest.getBudgetedFromDonation())
+                .unBudgetedFromDonation(contributionRequest.getUnBudgetedFromDonation())
+                .specialDayDate(contributionRequest.getSpecialDayDate())
+                .donationPurposeId(contributionRequest.getDonationPurposeId())
                 .build();
     }
 
@@ -93,6 +101,10 @@ public class ContributionDetailsService {
                 .donorPreferenceId(savedContributionEntity.getDonorPreferenceId())
                 .sponsorId(savedContributionEntity.getSponsorId())
                 .status(savedContributionEntity.getStatus())
+                .budgetedFromDonation(savedContributionEntity.getBudgetedFromDonation())
+                .unBudgetedFromDonation(savedContributionEntity.getUnBudgetedFromDonation())
+                .specialDayDate(savedContributionEntity.getSpecialDayDate())
+                .donationPurposeId(savedContributionEntity.getDonationPurposeId())
                 .build();
     }
 }
