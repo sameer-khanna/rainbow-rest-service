@@ -9,12 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 @Service
 public class DonationPurposeService {
+
     @Autowired
     private DonationPurposeRepository donationPurposeRepository;
 
+    public List<DonationPurpose> getAllDonationPurpose(){
+        return donationPurposeRepository.findAll();
+    }
     @Transactional
     public DonationPurposeResponse addDonationPurpose(DonationPurposeRequest donationPurposeRequest) {
         DonationPurpose savedDonationPurposeEntity = donationPurposeRepository.save(toRequestEntity(donationPurposeRequest));
