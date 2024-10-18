@@ -23,7 +23,7 @@ public class ContributionResponse {
     private String sponsorName;
 
     @JsonProperty("contributionDate")
-    private LocalDateTime contributionDate;
+    private String contributionDate;
 
     @JsonProperty("inkindId")
     private Integer inkindId;

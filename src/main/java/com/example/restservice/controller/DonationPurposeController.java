@@ -28,7 +28,7 @@ public class DonationPurposeController {
     public ResponseEntity<DonationPurposeResponse> createDonationPurpose(@RequestBody DonationPurposeRequest donationPurposeRequest) {
         DonationPurposeResponse savedDonationPurpose = donationPurposeService.addDonationPurpose(donationPurposeRequest);
         return new ResponseEntity<>(savedDonationPurpose, HttpStatus.CREATED);
-        }
+    }
     @GetMapping("/donationPurpose")
     public ResponseEntity<List<DonationPurpose>> getAllDonationPurpose(){
         List<DonationPurpose> donationPurposes = donationPurposeService.getAllDonationPurpose();

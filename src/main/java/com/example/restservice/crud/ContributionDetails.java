@@ -47,7 +47,7 @@ public class ContributionDetails {
     private String sponsorName;
 
     @Column(name = "ContributionDate", nullable = true)
-    private LocalDateTime contributionDate;
+    private String contributionDate;
 
     @Column(name = "InkindID", nullable = true)
     private Integer inkindID;
