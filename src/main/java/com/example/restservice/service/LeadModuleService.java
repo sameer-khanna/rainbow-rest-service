@@ -81,8 +81,8 @@ public class LeadModuleService {
     }
 
 
-    public List<FollowUp> getAllFollowUp() {
-        return followUpRepository.findAll();
+    public List<FollowUp> getFollowUpByLeadNo(String leadNo) {
+        return followUpRepository.findByLeadNo(leadNo);
     }
 
 

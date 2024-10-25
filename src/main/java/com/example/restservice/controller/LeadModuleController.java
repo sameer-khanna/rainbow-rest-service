@@ -61,12 +61,6 @@ public class LeadModuleController {
         return ResponseEntity.ok(followUpModes);
     }
 
-    @GetMapping("/follow-up")
-    public ResponseEntity<List<FollowUp>> getAllFollowUp(){
-        List<FollowUp> followUps = leadModuleService.getAllFollowUp();
-        return ResponseEntity.ok(followUps);
-    }
-
     @GetMapping("/donation-report-type")
     public ResponseEntity<List<DonationReportType>> getAllDonationReportType(){
         List<DonationReportType> donationReportTypes = leadModuleService.getAllDonationReportType();
@@ -81,9 +75,10 @@ public class LeadModuleController {
     }
 
 
-    @GetMapping("/get-followup")
-    public ResponseEntity<List<FollowUp>> getFollowup() {
-        List<FollowUp> followUpList = leadModuleService.getAllFollowUp();
-        return ResponseEntity.ok(followUpList);
+    @GetMapping("/get-follow-up/{leadNo}")
+    public ResponseEntity<List<FollowUp>> getFollowUpByLeadNo(@PathVariable String leadNo){
+        List<FollowUp> followUps = leadModuleService.getFollowUpByLeadNo(leadNo);
+        return ResponseEntity.ok(followUps);
     }
+
 }
