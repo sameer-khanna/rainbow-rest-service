@@ -40,5 +40,8 @@ public class LeadDonation {
 
     @Column(name = "CreatedDate", nullable = false)
     private LocalDateTime createdDate;
+
+    @Column(name = "LeadNo", nullable = false, unique = true, length = 50)
+    private String leadNo;
 }
 

@@ -33,4 +33,7 @@ public class LeadDonationRequest {
     @JsonProperty("renewDonor")
     private Boolean renewDonor;
 
+    @JsonProperty("leadNo")
+    private String leadNo;
+
 }

@@ -33,4 +33,7 @@ public class FollowUpResponse {
     @JsonProperty("createdDate")
     private LocalDateTime createdDate;
 
+    @JsonProperty("leadNo")
+    private String leadNo;
+
 }

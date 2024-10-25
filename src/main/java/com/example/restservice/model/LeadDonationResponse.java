@@ -40,4 +40,7 @@ public class LeadDonationResponse {
 
     @JsonProperty("createdDate")
     private LocalDateTime createdDate;
+
+    @JsonProperty("leadNo")
+    private String leadNo;
 }

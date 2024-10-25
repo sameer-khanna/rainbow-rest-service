@@ -36,4 +36,7 @@ public class FollowUp {
 
     @Column(name = "CreatedDate")
     private LocalDateTime createdDate;
+
+    @Column(name = "LeadNo", nullable = false, unique = true, length = 50)
+    private String leadNo;
 }

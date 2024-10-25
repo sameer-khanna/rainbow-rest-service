@@ -98,6 +98,7 @@ public class LeadModuleService {
         followUpResponse.setRemarks(followUpEntity.getRemarks());
         followUpResponse.setFollowUpDate(followUpEntity.getFollowUpDate());
         followUpResponse.setCreatedDate(followUpEntity.getCreatedDate());
+        followUpResponse.setLeadNo(followUpEntity.getLeadNo());
         return followUpResponse;
     }
 
@@ -111,6 +112,7 @@ public class LeadModuleService {
                 .shareReport(leadDonationRequest.getShareReport())
                 .renewDonor(leadDonationRequest.getRenewDonor())
                 .createdDate(LocalDateTime.now())
+                .leadNo(leadDonationRequest.getLeadNo())
                 .build();
         return leadDonationEntity;
     }
@@ -126,6 +128,7 @@ public class LeadModuleService {
         leadDonationResponse.setShareReport(leadDonationEntity.getShareReport());
         leadDonationResponse.setRenewDonor(leadDonationEntity.getRenewDonor());
         leadDonationResponse.setCreatedDate(leadDonationEntity.getCreatedDate());
+        leadDonationResponse.setLeadNo(leadDonationEntity.getLeadNo());
         return leadDonationResponse;
     }
 
@@ -136,6 +139,7 @@ public class LeadModuleService {
                 .remarks(followUpRequest.getRemarks())
                 .followUpDate(followUpRequest.getFollowUpDate())
                 .createdDate(LocalDateTime.now())
+                .leadNo(followUpRequest.getLeadNo())
                 .build();
         return followUpEntity;
     }

@@ -26,4 +26,7 @@ public class FollowUpRequest {
     @JsonProperty("followUpDate")
     private LocalDate followUpDate;
 
+    @JsonProperty("leadNo")
+    private String leadNo;
+
 }
