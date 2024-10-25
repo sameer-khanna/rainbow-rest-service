@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
+import static com.microsoft.sqlserver.jdbc.StringUtils.isNumeric;
 
 @Service
 public class LeadModuleService {
@@ -34,9 +37,25 @@ public class LeadModuleService {
     @Autowired
     private DonationReportTypeRepository donationReportTypeRepository;
 
+
     public LeadResponse createLead(LeadRequest leadRequest) {
         Lead leadEntity = leadRepository.save(toLeadEntity(leadRequest));
         return toLeadResponse(leadEntity);
+    }
+
+    public List<Lead> getLeadListBySearchParams(String search) {
+//        if (isNumeric(search)){
+//            long phone = Long.parseLong(search);
+//            if ((phone%10^9)!=0){
+//                return leadRepository.findByPocContactNumber(search);
+//            }
+//            return sponsorRepository.findBySponsorNoStartingWith(Integer.parseInt(search));
+            return leadRepository.findAllByLeadNo(search);
+//        }
+//        else {
+//            return leadRepository.findByLeadNameStartingWith(search);
+//        }
+//        return null;
     }
 
     public FollowUpResponse addFollowUp(FollowUpRequest followUpRequest) {
@@ -60,6 +79,12 @@ public class LeadModuleService {
     public List<FollowUpMode> getAllFollowUpMode() {
         return followUpModeRepository.findAll();
     }
+
+
+    public List<FollowUp> getAllFollowUp() {
+        return followUpRepository.findAll();
+    }
+
 
     public List<DonationReportType> getAllDonationReportType() {
         return donationReportTypeRepository.findAll();

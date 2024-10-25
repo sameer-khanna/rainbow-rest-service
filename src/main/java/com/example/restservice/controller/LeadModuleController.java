@@ -61,9 +61,29 @@ public class LeadModuleController {
         return ResponseEntity.ok(followUpModes);
     }
 
+    @GetMapping("/follow-up")
+    public ResponseEntity<List<FollowUp>> getAllFollowUp(){
+        List<FollowUp> followUps = leadModuleService.getAllFollowUp();
+        return ResponseEntity.ok(followUps);
+    }
+
     @GetMapping("/donation-report-type")
     public ResponseEntity<List<DonationReportType>> getAllDonationReportType(){
         List<DonationReportType> donationReportTypes = leadModuleService.getAllDonationReportType();
         return ResponseEntity.ok(donationReportTypes);
+    }
+
+
+    @GetMapping("/get-lead")
+    public ResponseEntity<List<Lead>> searchSponsor(@RequestParam("search") String search) {
+        List<Lead> leadList = leadModuleService.getLeadListBySearchParams(search);
+        return ResponseEntity.ok(leadList);
+    }
+
+
+    @GetMapping("/get-followup")
+    public ResponseEntity<List<FollowUp>> getFollowup() {
+        List<FollowUp> followUpList = leadModuleService.getAllFollowUp();
+        return ResponseEntity.ok(followUpList);
     }
 }
