@@ -19,7 +19,7 @@ public class FollowUpResponse {
     private Integer followUpId;
 
     @JsonProperty("assignedTo")
-    private String assignedTo;
+    private Integer assignedTo;
 
     @JsonProperty("modeId")
     private Integer modeId; // FK
@@ -34,6 +34,6 @@ public class FollowUpResponse {
     private LocalDateTime createdDate;
 
     @JsonProperty("leadNo")
-    private String leadNo;
+    private String leadNo; // FK
 
 }

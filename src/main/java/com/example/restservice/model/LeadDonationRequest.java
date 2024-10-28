@@ -22,10 +22,10 @@ public class LeadDonationRequest {
     private String remarks;
 
     @JsonProperty("reportTypeId")
-    private Integer reportTypeId;
+    private Integer reportTypeId; // FK
 
     @JsonProperty("reportSharingFreq")
-    private String reportSharingFreq;  // Foreign key to ReportSharingFrequency table
+    private String reportSharingFreq;
 
     @JsonProperty("shareReport")
     private Boolean shareReport;
@@ -34,6 +34,6 @@ public class LeadDonationRequest {
     private Boolean renewDonor;
 
     @JsonProperty("leadNo")
-    private String leadNo;
+    private String leadNo; //FK
 
 }

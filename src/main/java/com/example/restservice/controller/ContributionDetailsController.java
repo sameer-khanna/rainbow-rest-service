@@ -1,5 +1,6 @@
 package com.example.restservice.controller;
 
+import com.example.restservice.NotificationService;
 import com.example.restservice.model.ContributionRequest;
 import com.example.restservice.model.ContributionResponse;
 import com.example.restservice.service.ContributionDetailsService;
@@ -17,9 +18,13 @@ public class ContributionDetailsController {
     @Autowired
     private ContributionDetailsService contributionDetailsService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @PostMapping("/createContribution")
     public ResponseEntity<List<ContributionResponse>> createContribution(@RequestBody ContributionRequest contributionRequest) {
         List<ContributionResponse> savedContributionList = contributionDetailsService.createContribution(contributionRequest);
+        notificationService.sendNewDonationNotification(savedContributionList);
         return new ResponseEntity<>(savedContributionList, HttpStatus.CREATED);
     }
 }

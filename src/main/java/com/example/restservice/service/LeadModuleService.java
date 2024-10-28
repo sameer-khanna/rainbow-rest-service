@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -36,6 +37,12 @@ public class LeadModuleService {
 
     @Autowired
     private DonationReportTypeRepository donationReportTypeRepository;
+
+    @Autowired
+    private UserInfoRepository userInfoRepository;
+
+    @Autowired
+    private StaffRepository staffRepository;
 
 
     public LeadResponse createLead(LeadRequest leadRequest) {
@@ -89,6 +96,27 @@ public class LeadModuleService {
 
     public List<DonationReportType> getAllDonationReportType() {
         return donationReportTypeRepository.findAll();
+    }
+
+    public List<AssignedToResponse> getAssignedToList(Integer userId) {
+        UserInfo user = userInfoRepository.findByUserNo(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Integer orgId = user.getOrgId();
+
+        // Fetch all staff with matching orgId and jobTitle == 1
+        // Job title 1 is of Project In charge, hardcoding for now, can put conditions later based on orgLevel
+        List<Staff> staffList = staffRepository.findByOrgIDAndJobTitle(orgId, 1);
+
+        List<AssignedToResponse> assignedToList = new ArrayList<>();
+        for(Staff staffMember : staffList) {
+            String userName = staffMember.getFirstName() + " " + staffMember.getLastName();
+            AssignedToResponse res = new AssignedToResponse();
+            res.setUserId(staffMember.getStaffNo());
+            res.setUserName(userName);
+            assignedToList.add(res);
+        }
+
+        return  assignedToList;
     }
 
     private FollowUpResponse toFollowUpResponse(FollowUp followUpEntity) {

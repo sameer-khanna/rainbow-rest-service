@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class FollowUpRequest {
 
     @JsonProperty("assignedTo")
-    private String assignedTo;
+    private Integer assignedTo;
 
     @JsonProperty("modeId")
     private Integer modeId; // FK
@@ -27,6 +27,6 @@ public class FollowUpRequest {
     private LocalDate followUpDate;
 
     @JsonProperty("leadNo")
-    private String leadNo;
+    private String leadNo; // FK
 
 }

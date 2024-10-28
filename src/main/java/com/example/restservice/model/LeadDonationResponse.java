@@ -27,7 +27,7 @@ public class LeadDonationResponse {
     private String remarks;
 
     @JsonProperty("reportTypeId")
-    private Integer reportTypeId;
+    private Integer reportTypeId; //FK
 
     @JsonProperty("reportSharingFreq")
     private String reportSharingFreq;
@@ -42,5 +42,5 @@ public class LeadDonationResponse {
     private LocalDateTime createdDate;
 
     @JsonProperty("leadNo")
-    private String leadNo;
+    private String leadNo; //FK
 }

@@ -81,4 +81,10 @@ public class LeadModuleController {
         return ResponseEntity.ok(followUps);
     }
 
+    @GetMapping("/get-assigned-to/{userId}")
+    public ResponseEntity<List<AssignedToResponse>> getAssignedTo(@PathVariable Integer userId) {
+        List<AssignedToResponse> assignedToList = leadModuleService.getAssignedToList(userId);
+        return ResponseEntity.ok(assignedToList);
+    }
+
 }

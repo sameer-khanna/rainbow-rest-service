@@ -22,8 +22,8 @@ public class FollowUp {
     @Column(name = "FollowUpId", nullable = false)
     private Integer followUpId;
 
-    @Column(name = "AssignedTo", nullable = false, length = 255)
-    private String assignedTo;
+    @Column(name = "AssignedTo", nullable = false)
+    private Integer assignedTo;
 
     @Column(name = "ModeId",  nullable = false)
     private Integer modeId;
