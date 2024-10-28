@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LeadRepository extends JpaRepository<Lead, String> {
 
-//    List<Lead> findByLeadNameStartingWith(String name);
+    List<Lead> findByOrganisationName(String name);
     List<Lead> findAllByLeadNo(String leadNo);
-//    List<Lead> findByPocContactNumber(String mobileNo);
+    List<Lead> findByOrgContactNumber(String mobileNo);
 }

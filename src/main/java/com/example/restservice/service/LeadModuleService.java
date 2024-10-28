@@ -44,18 +44,19 @@ public class LeadModuleService {
     }
 
     public List<Lead> getLeadListBySearchParams(String search) {
-//        if (isNumeric(search)){
-//            long phone = Long.parseLong(search);
-//            if ((phone%10^9)!=0){
-//                return leadRepository.findByPocContactNumber(search);
-//            }
-//            return sponsorRepository.findBySponsorNoStartingWith(Integer.parseInt(search));
-            return leadRepository.findAllByLeadNo(search);
-//        }
-//        else {
-//            return leadRepository.findByLeadNameStartingWith(search);
-//        }
-//        return null;
+        if (isNumeric(search)){
+            long phone = Long.parseLong(search);
+            if ((phone%10^9)!=0){
+                return leadRepository.findByOrgContactNumber(search);
+            }
+        }
+        else {
+            if(search.startsWith("Lead")){
+                return leadRepository.findAllByLeadNo(search);
+            }
+        }
+        return leadRepository.findByOrganisationName(search);
+
     }
 
     public FollowUpResponse addFollowUp(FollowUpRequest followUpRequest) {
