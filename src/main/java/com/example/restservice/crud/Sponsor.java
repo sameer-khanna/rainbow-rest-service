@@ -68,5 +68,9 @@ public class Sponsor {
     @JoinColumn(name = "donorTypeId", nullable = false)
     private DonorType donorType;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "donorSourceId", nullable = false)
+    private DonorSource donorSource;
+
 }
 

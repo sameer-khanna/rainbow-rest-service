@@ -44,6 +44,9 @@ public class SponsorRequest {
     @JsonProperty("address")
     private String address;
 
+    @JsonProperty("donorSourceId")
+    private Integer donorSourceId;
+
 //    // Getters and Setters
 //    public String getSponsorName() {
 //        return sponsorName;

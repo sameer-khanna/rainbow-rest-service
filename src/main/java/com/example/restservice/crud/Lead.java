@@ -77,5 +77,8 @@ public class Lead {
 
     @Column(name = "CreatedDate", nullable = false)
     private LocalDateTime createdDate;
+
+    @Column(name = "ConvertedToDonor", nullable = false)
+    private Boolean convertedToDonor;
 }
 

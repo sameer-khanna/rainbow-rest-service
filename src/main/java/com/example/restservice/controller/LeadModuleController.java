@@ -69,8 +69,14 @@ public class LeadModuleController {
 
 
     @GetMapping("/get-lead")
-    public ResponseEntity<List<Lead>> searchSponsor(@RequestParam("search") String search) {
+    public ResponseEntity<List<Lead>> searchLeads(@RequestParam("search") String search) {
         List<Lead> leadList = leadModuleService.getLeadListBySearchParams(search);
+        return ResponseEntity.ok(leadList);
+    }
+
+    @GetMapping("/get-converted-lead")
+    public ResponseEntity<List<Lead>> searchConvertedLeads(@RequestParam("search") String search) {
+        List<Lead> leadList = leadModuleService.getConvertedLeadListBySearchParams(search);
         return ResponseEntity.ok(leadList);
     }
 

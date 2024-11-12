@@ -47,6 +47,9 @@ public class SponsorResponse {
 
     @JsonProperty("address")
     private String address;
+
+    @JsonProperty("donorSourceName")
+    private String donorSourceName;
 }
 
 

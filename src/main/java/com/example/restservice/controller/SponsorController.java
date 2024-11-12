@@ -1,5 +1,7 @@
 package com.example.restservice.controller;
 
+import com.example.restservice.crud.DonorSource;
+import com.example.restservice.crud.DonorType;
 import com.example.restservice.crud.Sponsor;
 import com.example.restservice.model.SponsorRequest;
 import com.example.restservice.model.SponsorResponse;
@@ -27,6 +29,12 @@ public class SponsorController {
     public ResponseEntity<List<Sponsor>> searchSponsor(@RequestParam("search") String search) {
         List<Sponsor> sponsorList = sponsorService.getSponsorListBySearchParams(search);
         return ResponseEntity.ok(sponsorList);
+    }
+
+    @GetMapping("/donorSource")
+    public ResponseEntity<List<DonorSource>> getAllDonorSource(){
+        List<DonorSource> donorSourceList = sponsorService.getAllDonorSource();
+        return ResponseEntity.ok(donorSourceList);
     }
 
 }

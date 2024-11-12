@@ -1,9 +1,11 @@
 package com.example.restservice.service;
 
+import com.example.restservice.crud.DonorSource;
 import com.example.restservice.crud.DonorType;
 import com.example.restservice.crud.Sponsor;
 import com.example.restservice.model.SponsorRequest;
 import com.example.restservice.model.SponsorResponse;
+import com.example.restservice.repository.DonorSourceRepository;
 import com.example.restservice.repository.DonorTypeRepository;
 import com.example.restservice.repository.SponsorRepository;
 import org.slf4j.Logger;
@@ -15,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
@@ -27,6 +28,9 @@ public class SponsorService {
     @Autowired
     private DonorTypeRepository donorTypeRepository;
 
+    @Autowired
+    private DonorSourceRepository donorSourceRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(SponsorService.class);
 
     @Transactional
@@ -35,7 +39,10 @@ public class SponsorService {
             DonorType donorType = donorTypeRepository.findById(sponsorRequest.getDonorTypeId())
                     .orElseThrow(() -> new IllegalArgumentException("Invalid Donor Type Id"));
 
-            Sponsor sponsorEntity = toSponsorEntity(sponsorRequest, donorType);
+            DonorSource donorSource = donorSourceRepository.findById(sponsorRequest.getDonorSourceId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Donor Source Id"));
+
+            Sponsor sponsorEntity = toSponsorEntity(sponsorRequest, donorType, donorSource);
 
             Sponsor savedSponsor = sponsorRepository.save(sponsorEntity);
 
@@ -49,7 +56,11 @@ public class SponsorService {
         }
     }
 
-    private Sponsor toSponsorEntity(SponsorRequest sponsorRequest, DonorType donorType) {
+    public List<DonorSource> getAllDonorSource() {
+        return donorSourceRepository.findAll();
+    }
+
+    private Sponsor toSponsorEntity(SponsorRequest sponsorRequest, DonorType donorType, DonorSource donorSource) {
         return Sponsor.builder()
                 .sponsorName(sponsorRequest.getSponsorName())
                 .rhNo(sponsorRequest.getRhNo())
@@ -63,6 +74,7 @@ public class SponsorService {
                 .modifiedBy(sponsorRequest.getModifiedBy())
                 .birthday(sponsorRequest.getBirthday())
                 .address(sponsorRequest.getAddress())
+                .donorSource(donorSource)
                 .build();
     }
 
@@ -81,6 +93,7 @@ public class SponsorService {
                 .createdBy(savedSponsor.getCreatedBy())
                 .birthday(savedSponsor.getBirthday())
                 .address(savedSponsor.getAddress())
+                .donorSourceName(savedSponsor.getDonorSource().getDonorSourceName())
                 .build();
     }
 
@@ -106,4 +119,5 @@ public class SponsorService {
             return sponsorRepository.findBySponsorNameStartingWith(search);
         }
     }
+
 }

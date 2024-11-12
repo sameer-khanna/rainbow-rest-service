@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface LeadRepository extends JpaRepository<Lead, String> {
 
-    List<Lead> findByOrganisationName(String name);
-    List<Lead> findAllByLeadNo(String leadNo);
-    List<Lead> findByOrgContactNumber(String mobileNo);
+    List<Lead> findByOrganisationNameAndConvertedToDonor(String name, Boolean convertedToDonor);
+    List<Lead> findAllByLeadNoAndConvertedToDonor(String leadNo, Boolean convertedToDonor);
+    List<Lead> findByOrgContactNumberAndConvertedToDonor(String mobileNo, Boolean convertedToDonor);
+    Lead findByLeadNo(String leadNo);
 }

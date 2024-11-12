@@ -54,15 +54,31 @@ public class LeadModuleService {
         if (isNumeric(search)){
             long phone = Long.parseLong(search);
             if ((phone%10^9)!=0){
-                return leadRepository.findByOrgContactNumber(search);
+                return leadRepository.findByOrgContactNumberAndConvertedToDonor(search, false);
             }
         }
         else {
             if(search.startsWith("Lead")){
-                return leadRepository.findAllByLeadNo(search);
+                return leadRepository.findAllByLeadNoAndConvertedToDonor(search, false);
             }
         }
-        return leadRepository.findByOrganisationName(search);
+        return leadRepository.findByOrganisationNameAndConvertedToDonor(search, false);
+
+    }
+
+    public List<Lead> getConvertedLeadListBySearchParams(String search) {
+        if (isNumeric(search)){
+            long phone = Long.parseLong(search);
+            if ((phone%10^9)!=0){
+                return leadRepository.findByOrgContactNumberAndConvertedToDonor(search, true);
+            }
+        }
+        else {
+            if(search.startsWith("Lead")){
+                return leadRepository.findAllByLeadNoAndConvertedToDonor(search, true);
+            }
+        }
+        return leadRepository.findByOrganisationNameAndConvertedToDonor(search, true);
 
     }
 
@@ -73,6 +89,11 @@ public class LeadModuleService {
 
     public LeadDonationResponse addLeadDonation(LeadDonationRequest leadDonationRequest) {
         LeadDonation leadDonationEntity = leadDonationRepository.save(toLeadDonationEntity(leadDonationRequest));
+        Lead leadEntity = leadRepository.findByLeadNo(leadDonationRequest.getLeadNo());
+        if(leadEntity != null) {
+            leadEntity.setConvertedToDonor(true);
+            leadRepository.save(leadEntity);
+        }
         return toLeadDonationResponse(leadDonationEntity);
     }
 
@@ -224,6 +245,7 @@ public class LeadModuleService {
                 .leadBroughtBy(leadRequest.getLeadBroughtBy())
                 .followUp(leadRequest.getFollowUp())
                 .createdDate(LocalDateTime.now())
+                .convertedToDonor(false)
                 .build();
 
         return leadEntity;
