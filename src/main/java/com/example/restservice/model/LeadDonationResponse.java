@@ -26,11 +26,14 @@ public class LeadDonationResponse {
     @JsonProperty("remarks")
     private String remarks;
 
-    @JsonProperty("reportTypeId")
-    private Integer reportTypeId; //FK
+    @JsonProperty("quarterlyReportTypeId")
+    private Integer quarterlyReportTypeId; // FK
 
-    @JsonProperty("reportSharingFreq")
-    private String reportSharingFreq;
+    @JsonProperty("halfYearlyReportTypeId")
+    private Integer halfYearlyReportTypeId; // FK
+
+    @JsonProperty("yearlyReportTypeId")
+    private Integer yearlyReportTypeId; // FK
 
     @JsonProperty("shareReport")
     private Boolean shareReport;

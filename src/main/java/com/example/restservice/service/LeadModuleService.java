@@ -157,8 +157,9 @@ public class LeadModuleService {
                 .donationAmount(leadDonationRequest.getDonationAmount())
                 .donationCycle(leadDonationRequest.getDonationCycle())
                 .remarks(leadDonationRequest.getRemarks())
-                .reportTypeId(leadDonationRequest.getReportTypeId())
-                .reportSharingFreq(leadDonationRequest.getReportSharingFreq())
+                .quarterlyReportTypeId(leadDonationRequest.getQuarterlyReportTypeId())
+                .halfYearlyReportTypeId(leadDonationRequest.getHalfYearlyReportTypeId())
+                .yearlyReportTypeId(leadDonationRequest.getYearlyReportTypeId())
                 .shareReport(leadDonationRequest.getShareReport())
                 .renewDonor(leadDonationRequest.getRenewDonor())
                 .createdDate(LocalDateTime.now())
@@ -173,8 +174,9 @@ public class LeadModuleService {
         leadDonationResponse.setDonationAmount(leadDonationEntity.getDonationAmount());
         leadDonationResponse.setDonationCycle(leadDonationEntity.getDonationCycle());
         leadDonationResponse.setRemarks(leadDonationEntity.getRemarks());
-        leadDonationResponse.setReportTypeId(leadDonationEntity.getReportTypeId());
-        leadDonationResponse.setReportSharingFreq(leadDonationEntity.getReportSharingFreq());
+        leadDonationResponse.setQuarterlyReportTypeId(leadDonationEntity.getQuarterlyReportTypeId());
+        leadDonationResponse.setHalfYearlyReportTypeId(leadDonationEntity.getHalfYearlyReportTypeId());
+        leadDonationResponse.setYearlyReportTypeId(leadDonationEntity.getYearlyReportTypeId());
         leadDonationResponse.setShareReport(leadDonationEntity.getShareReport());
         leadDonationResponse.setRenewDonor(leadDonationEntity.getRenewDonor());
         leadDonationResponse.setCreatedDate(leadDonationEntity.getCreatedDate());

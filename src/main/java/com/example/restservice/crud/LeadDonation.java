@@ -26,11 +26,14 @@ public class LeadDonation {
     @Column(name = "Remarks", length = 500)
     private String remarks;
 
-    @Column(name = "ReportTypeId", nullable = false)
-    private Integer reportTypeId;  // Foreign key to ReportType table
+    @Column(name = "QuarterlyReportTypeId", nullable = false)
+    private Integer quarterlyReportTypeId;  // Foreign key to ReportType table
 
-    @Column(name = "ReportSharingFreq", nullable = false)
-    private String reportSharingFreq;
+    @Column(name = "HalfYearlyReportTypeId", nullable = false)
+    private Integer halfYearlyReportTypeId;  // Foreign key to ReportType table
+
+    @Column(name = "YearlyReportTypeId", nullable = false)
+    private Integer yearlyReportTypeId;  // Foreign key to ReportType table
 
     @Column(name = "ShareReport", nullable = false)
     private Boolean shareReport;
